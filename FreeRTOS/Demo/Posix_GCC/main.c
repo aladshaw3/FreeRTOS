@@ -34,11 +34,11 @@
  * If mainSELECTED_APPLICATION = BLINKY_DEMO the simple blinky demo will be built.
  * The simply blinky demo is implemented and described in main_blinky.c.
  *
- * If mainSELECTED_APPLICATION = FULL_DEMO the more comprehensive test and demo 
+ * If mainSELECTED_APPLICATION = FULL_DEMO the more comprehensive test and demo
  * application built. This is implemented and described in main_full.c.
  *
- * If mainSELECTED_APPLICATION = ECHO_CLIENT_DEMO the tcp echo demo will be built. 
- * This is implemented and described in main_networking.c 
+ * If mainSELECTED_APPLICATION = ECHO_CLIENT_DEMO the tcp echo demo will be built.
+ * This is implemented and described in main_networking.c
  *
  * This file implements the code that is not demo specific, including the
  * hardware setup and FreeRTOS hook functions.
@@ -71,7 +71,7 @@
 #define    FULL_DEMO         1
 #define    ECHO_CLIENT_DEMO  2
 
-#define mainSELECTED_APPLICATION FULL_DEMO
+#define mainSELECTED_APPLICATION BLINKY_DEMO
 
 /* This demo uses heap_3.c (the libc provided malloc() and free()). */
 
@@ -194,7 +194,7 @@ void vApplicationIdleHook( void )
 	vTaskDelete() API function to delete themselves then it is also important
 	that vApplicationIdleHook() is permitted to return to its calling function,
 	because it is the responsibility of the idle task to clean up memory
-	allocated by the kernel to any task that has since deleted itself. */	
+	allocated by the kernel to any task that has since deleted itself. */
 
 
 	usleep(15000);
