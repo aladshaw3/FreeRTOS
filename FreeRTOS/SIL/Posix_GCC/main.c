@@ -256,7 +256,8 @@ void traceOnEnter()
 	}
 	/* clear the buffer */
 	char buffer[200];
-	read(1, &buffer, 200);
+	ssize_t n;
+	n = read(1, &buffer, 200);
 	}
 }
 

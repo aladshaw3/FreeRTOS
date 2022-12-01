@@ -72,6 +72,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include <stdio.h>
 
 /* Kernel includes. */
 #include <FreeRTOS.h>
@@ -397,12 +398,12 @@ HeapStats_t xHeapStats;
 			}
 		#endif /* configSUPPORT_STATIC_ALLOCATION */
 
-		printf( "%s - tick count %u \r\n",
+		printf( "%s - tick count %lu \r\n",
 					pcStatusMessage,
 					xTaskGetTickCount() );
 
 		// Reset the error condition
-		pcStatusMessage = "OK: No errors";	
+		pcStatusMessage = "OK: No errors";
 	}
 }
 /*-----------------------------------------------------------*/
