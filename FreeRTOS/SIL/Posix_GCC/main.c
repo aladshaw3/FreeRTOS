@@ -125,6 +125,7 @@ static BaseType_t xTraceRunning = pdTRUE;
 
 int main( void )
 {
+
 	/* Do not include trace code when performing a code coverage analysis. */
 	#if ( projCOVERAGE_TEST != 1 )
 	{
@@ -161,6 +162,7 @@ int main( void )
 		#error "The selected demo is not valid"
 	}
 	#endif /* if ( mainSELECTED_APPLICATION ) */
+
 
 	return 0;
 }

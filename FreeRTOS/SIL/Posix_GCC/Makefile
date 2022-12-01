@@ -6,6 +6,7 @@
 # to test the TCP comms demo.
 
 CC := gcc
+CXX := g++
 BIN := posix_demo.out
 
 FREERTOS_DIR_REL := ../../../FreeRTOS
@@ -24,79 +25,108 @@ INCLUDE_DIRS += -I${FREERTOS_PLUS_DIR}/Source/FreeRTOS-Plus-TCP/portable/Network
 INCLUDE_DIRS += -I${FREERTOS_PLUS_DIR}/Source/FreeRTOS-Plus-TCP/include/
 INCLUDE_DIRS += -I${FREERTOS_PLUS_DIR}/Source/FreeRTOS-Plus-TCP/portable/Compiler/GCC/
 
-SOURCE_FILES := $(wildcard *.c)
-SOURCE_FILES += $(wildcard ${FREERTOS_DIR}/Source/*.c)
+C_SOURCE_FILES := $(wildcard *.c)
+C_SOURCE_FILES += $(wildcard ${FREERTOS_DIR}/Source/*.c)
 # Memory manager (use malloc() / free() )
-SOURCE_FILES += ${FREERTOS_DIR}/Source/portable/MemMang/heap_3.c
+C_SOURCE_FILES += ${FREERTOS_DIR}/Source/portable/MemMang/heap_3.c
 # posix port
-SOURCE_FILES += ${FREERTOS_DIR}/Source/portable/ThirdParty/GCC/Posix/utils/wait_for_event.c
-SOURCE_FILES += ${FREERTOS_DIR}/Source/portable/ThirdParty/GCC/Posix/port.c
+C_SOURCE_FILES += ${FREERTOS_DIR}/Source/portable/ThirdParty/GCC/Posix/utils/wait_for_event.c
+C_SOURCE_FILES += ${FREERTOS_DIR}/Source/portable/ThirdParty/GCC/Posix/port.c
 
 # FreeRTOS TCP
-SOURCE_FILES += ${FREERTOS_PLUS_DIR}/Source/FreeRTOS-Plus-TCP/FreeRTOS_DNS.c
-SOURCE_FILES += ${FREERTOS_PLUS_DIR}/Source/FreeRTOS-Plus-TCP/FreeRTOS_DHCP.c
-SOURCE_FILES += ${FREERTOS_PLUS_DIR}/Source/FreeRTOS-Plus-TCP/FreeRTOS_ARP.c
-SOURCE_FILES += ${FREERTOS_PLUS_DIR}/Source/FreeRTOS-Plus-TCP/FreeRTOS_TCP_WIN.c
-SOURCE_FILES += ${FREERTOS_PLUS_DIR}/Source/FreeRTOS-Plus-TCP/FreeRTOS_Stream_Buffer.c
-SOURCE_FILES += ${FREERTOS_PLUS_DIR}/Source/FreeRTOS-Plus-TCP/portable/BufferManagement/BufferAllocation_2.c
-SOURCE_FILES += ${FREERTOS_PLUS_DIR}/Source/FreeRTOS-Plus-TCP/FreeRTOS_IP.c
-SOURCE_FILES += ${FREERTOS_PLUS_DIR}/Source/FreeRTOS-Plus-TCP/FreeRTOS_TCP_IP.c
-SOURCE_FILES += ${FREERTOS_PLUS_DIR}/Source/FreeRTOS-Plus-TCP/FreeRTOS_UDP_IP.c
-SOURCE_FILES += ${FREERTOS_PLUS_DIR}/Source/FreeRTOS-Plus-TCP/FreeRTOS_Sockets.c
-SOURCE_FILES += ${FREERTOS_PLUS_DIR}/Source/FreeRTOS-Plus-TCP/portable/NetworkInterface/linux/NetworkInterface.c
+C_SOURCE_FILES += ${FREERTOS_PLUS_DIR}/Source/FreeRTOS-Plus-TCP/FreeRTOS_DNS.c
+C_SOURCE_FILES += ${FREERTOS_PLUS_DIR}/Source/FreeRTOS-Plus-TCP/FreeRTOS_DHCP.c
+C_SOURCE_FILES += ${FREERTOS_PLUS_DIR}/Source/FreeRTOS-Plus-TCP/FreeRTOS_ARP.c
+C_SOURCE_FILES += ${FREERTOS_PLUS_DIR}/Source/FreeRTOS-Plus-TCP/FreeRTOS_TCP_WIN.c
+C_SOURCE_FILES += ${FREERTOS_PLUS_DIR}/Source/FreeRTOS-Plus-TCP/FreeRTOS_Stream_Buffer.c
+C_SOURCE_FILES += ${FREERTOS_PLUS_DIR}/Source/FreeRTOS-Plus-TCP/portable/BufferManagement/BufferAllocation_2.c
+C_SOURCE_FILES += ${FREERTOS_PLUS_DIR}/Source/FreeRTOS-Plus-TCP/FreeRTOS_IP.c
+C_SOURCE_FILES += ${FREERTOS_PLUS_DIR}/Source/FreeRTOS-Plus-TCP/FreeRTOS_TCP_IP.c
+C_SOURCE_FILES += ${FREERTOS_PLUS_DIR}/Source/FreeRTOS-Plus-TCP/FreeRTOS_UDP_IP.c
+C_SOURCE_FILES += ${FREERTOS_PLUS_DIR}/Source/FreeRTOS-Plus-TCP/FreeRTOS_Sockets.c
+C_SOURCE_FILES += ${FREERTOS_PLUS_DIR}/Source/FreeRTOS-Plus-TCP/portable/NetworkInterface/linux/NetworkInterface.c
 
 # Demo library.
-SOURCE_FILES += ${FREERTOS_DIR}/Demo/Common/Minimal/AbortDelay.c
-SOURCE_FILES += ${FREERTOS_DIR}/Demo/Common/Minimal/BlockQ.c
-SOURCE_FILES += ${FREERTOS_DIR}/Demo/Common/Minimal/blocktim.c
-SOURCE_FILES += ${FREERTOS_DIR}/Demo/Common/Minimal/countsem.c
-SOURCE_FILES += ${FREERTOS_DIR}/Demo/Common/Minimal/death.c
-SOURCE_FILES += ${FREERTOS_DIR}/Demo/Common/Minimal/dynamic.c
-SOURCE_FILES += ${FREERTOS_DIR}/Demo/Common/Minimal/EventGroupsDemo.c
-SOURCE_FILES += ${FREERTOS_DIR}/Demo/Common/Minimal/flop.c
-SOURCE_FILES += ${FREERTOS_DIR}/Demo/Common/Minimal/GenQTest.c
-SOURCE_FILES += ${FREERTOS_DIR}/Demo/Common/Minimal/integer.c
-SOURCE_FILES += ${FREERTOS_DIR}/Demo/Common/Minimal/IntSemTest.c
-SOURCE_FILES += ${FREERTOS_DIR}/Demo/Common/Minimal/MessageBufferAMP.c
-SOURCE_FILES += ${FREERTOS_DIR}/Demo/Common/Minimal/MessageBufferDemo.c
-SOURCE_FILES += ${FREERTOS_DIR}/Demo/Common/Minimal/PollQ.c
-SOURCE_FILES += ${FREERTOS_DIR}/Demo/Common/Minimal/QPeek.c
-SOURCE_FILES += ${FREERTOS_DIR}/Demo/Common/Minimal/QueueOverwrite.c
-SOURCE_FILES += ${FREERTOS_DIR}/Demo/Common/Minimal/QueueSet.c
-SOURCE_FILES += ${FREERTOS_DIR}/Demo/Common/Minimal/QueueSetPolling.c
-SOURCE_FILES += ${FREERTOS_DIR}/Demo/Common/Minimal/recmutex.c
-SOURCE_FILES += ${FREERTOS_DIR}/Demo/Common/Minimal/semtest.c
-SOURCE_FILES += ${FREERTOS_DIR}/Demo/Common/Minimal/StaticAllocation.c
-SOURCE_FILES += ${FREERTOS_DIR}/Demo/Common/Minimal/StreamBufferDemo.c
-SOURCE_FILES += ${FREERTOS_DIR}/Demo/Common/Minimal/StreamBufferInterrupt.c
-SOURCE_FILES += ${FREERTOS_DIR}/Demo/Common/Minimal/TaskNotify.c
-SOURCE_FILES += ${FREERTOS_DIR}/Demo/Common/Minimal/TimerDemo.c
+C_SOURCE_FILES += ${FREERTOS_DIR}/Demo/Common/Minimal/AbortDelay.c
+C_SOURCE_FILES += ${FREERTOS_DIR}/Demo/Common/Minimal/BlockQ.c
+C_SOURCE_FILES += ${FREERTOS_DIR}/Demo/Common/Minimal/blocktim.c
+C_SOURCE_FILES += ${FREERTOS_DIR}/Demo/Common/Minimal/countsem.c
+C_SOURCE_FILES += ${FREERTOS_DIR}/Demo/Common/Minimal/death.c
+C_SOURCE_FILES += ${FREERTOS_DIR}/Demo/Common/Minimal/dynamic.c
+C_SOURCE_FILES += ${FREERTOS_DIR}/Demo/Common/Minimal/EventGroupsDemo.c
+C_SOURCE_FILES += ${FREERTOS_DIR}/Demo/Common/Minimal/flop.c
+C_SOURCE_FILES += ${FREERTOS_DIR}/Demo/Common/Minimal/GenQTest.c
+C_SOURCE_FILES += ${FREERTOS_DIR}/Demo/Common/Minimal/integer.c
+C_SOURCE_FILES += ${FREERTOS_DIR}/Demo/Common/Minimal/IntSemTest.c
+C_SOURCE_FILES += ${FREERTOS_DIR}/Demo/Common/Minimal/MessageBufferAMP.c
+C_SOURCE_FILES += ${FREERTOS_DIR}/Demo/Common/Minimal/MessageBufferDemo.c
+C_SOURCE_FILES += ${FREERTOS_DIR}/Demo/Common/Minimal/PollQ.c
+C_SOURCE_FILES += ${FREERTOS_DIR}/Demo/Common/Minimal/QPeek.c
+C_SOURCE_FILES += ${FREERTOS_DIR}/Demo/Common/Minimal/QueueOverwrite.c
+C_SOURCE_FILES += ${FREERTOS_DIR}/Demo/Common/Minimal/QueueSet.c
+C_SOURCE_FILES += ${FREERTOS_DIR}/Demo/Common/Minimal/QueueSetPolling.c
+C_SOURCE_FILES += ${FREERTOS_DIR}/Demo/Common/Minimal/recmutex.c
+C_SOURCE_FILES += ${FREERTOS_DIR}/Demo/Common/Minimal/semtest.c
+C_SOURCE_FILES += ${FREERTOS_DIR}/Demo/Common/Minimal/StaticAllocation.c
+C_SOURCE_FILES += ${FREERTOS_DIR}/Demo/Common/Minimal/StreamBufferDemo.c
+C_SOURCE_FILES += ${FREERTOS_DIR}/Demo/Common/Minimal/StreamBufferInterrupt.c
+C_SOURCE_FILES += ${FREERTOS_DIR}/Demo/Common/Minimal/TaskNotify.c
+C_SOURCE_FILES += ${FREERTOS_DIR}/Demo/Common/Minimal/TimerDemo.c
 
 # Trace library.
-SOURCE_FILES += ${FREERTOS_PLUS_DIR}/Source/FreeRTOS-Plus-Trace/trcKernelPort.c
-SOURCE_FILES += ${FREERTOS_PLUS_DIR}/Source/FreeRTOS-Plus-Trace/trcSnapshotRecorder.c
-SOURCE_FILES += ${FREERTOS_PLUS_DIR}/Source/FreeRTOS-Plus-Trace/trcStreamingRecorder.c
-SOURCE_FILES += ${FREERTOS_PLUS_DIR}/Source/FreeRTOS-Plus-Trace/streamports/File/trcStreamingPort.c
+C_SOURCE_FILES += ${FREERTOS_PLUS_DIR}/Source/FreeRTOS-Plus-Trace/trcKernelPort.c
+C_SOURCE_FILES += ${FREERTOS_PLUS_DIR}/Source/FreeRTOS-Plus-Trace/trcSnapshotRecorder.c
+C_SOURCE_FILES += ${FREERTOS_PLUS_DIR}/Source/FreeRTOS-Plus-Trace/trcStreamingRecorder.c
+C_SOURCE_FILES += ${FREERTOS_PLUS_DIR}/Source/FreeRTOS-Plus-Trace/streamports/File/trcStreamingPort.c
 
+# C++ files
+CXX_SOURCE_FILES := $(wildcard *.cpp)
 
 CFLAGS := -O3 -DprojCOVERAGE_TEST=0
+CXXFLAGS := -O3 -std=c++14 -DprojCOVERAGE_TEST=0
 LDFLAGS := -O3 -pthread -lpcap
 
-OBJ_FILES = $(SOURCE_FILES:%.c=%.o)
+C_OBJ_FILES = $(C_SOURCE_FILES:%.c=%.o)
 
+CXX_OBJ_FILES = $(CXX_SOURCE_FILES:%.cpp=%.o)
+
+OBJ_FILES = $(C_OBJ_FILES) $(CXX_OBJ_FILES)
+
+#DEP_FILE = $(C_OBJ_FILES:%.o=%.d)
 DEP_FILE = $(OBJ_FILES:%.o=%.d)
 
-${BIN} : $(BIN)
 
+# NOTE: when building with C++ files, the 'main' executable
+#	must be compiled with g++.
 ${BIN} : ${OBJ_FILES}
-	$(CC) $^ $(CFLAGS) $(INCLUDE_DIRS) ${LDFLAGS} -o $@
+	$(CXX) $^ $(CXXFLAGS) ${LDFLAGS} -o $@
 
 -include ${DEP_FILE}
+DEPFLAGS = -MMD -MF $(@:.o=.d)
+
+#main_blinky.o : main_blinky.c
+#	$(CXX) $(CXXFLAGS) ${INCLUDE_DIRS} $(DEPFLAGS) -c $< -o $@
+
+
+#$(ODIR)/%.o: src/%.c $(DEPS)
+#	$(CC) -O3 -c -o $@ $< $(CFLAGS)
+#
+#$(ODIR)/%.o: src/%.cpp $(DEPS)
+#	$(CXX) -O3 -c -o $@ $< $(CXXFLAGS)
+#
+#$(EXE): $(OBJ)
+#	$(CXX) -O3 -o $@ $^ $(CXXFLAGS)
 
 %.o : %.c
-	$(CC) $(CFLAGS) ${INCLUDE_DIRS} -MMD -c $< -o $@
+	$(CC) $(CFLAGS) ${INCLUDE_DIRS} $(DEPFLAGS) -c $< -o $@
 
-.PHONY: clean
+%.o : %.cpp
+	$(CXX) $(CXXFLAGS) ${INCLUDE_DIRS} $(DEPFLAGS) -c $< -o $@
+
+.PHONY: clean help
 
 clean:
 	-rm -rf $(OBJ_FILES) $(DEP_FILE) $(BIN)
+
+help:
+	@echo "DEPFLAGS: $(DEPFLAGS)"

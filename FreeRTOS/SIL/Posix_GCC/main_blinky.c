@@ -92,6 +92,12 @@
 /* Local includes. */
 #include "console.h"
 
+/* include c++ files */
+#include "port_template_wrapper.h"
+
+/* Include custom c++ code */
+//#include "port_template_wrapper.h"
+
 /* Priorities at which the tasks are created. */
 #define mainQUEUE_RECEIVE_TASK_PRIORITY		( tskIDLE_PRIORITY + 2 )
 #define	mainQUEUE_SEND_TASK_PRIORITY		( tskIDLE_PRIORITY + 1 )
@@ -136,12 +142,15 @@ static TimerHandle_t xTimer = NULL;
 /* Global defined counter */
 static int counter = 0;
 
+static void * obj;
+
 /*-----------------------------------------------------------*/
 
 /*** SEE THE COMMENTS AT THE TOP OF THIS FILE ***/
 void main_blinky( void )
 {
 const TickType_t xTimerPeriod = mainTIMER_SEND_FREQUENCY_MS;
+	obj = createMyPort();
 
 	/* Create the queue. */
 	xQueue = xQueueCreate( mainQUEUE_LENGTH, sizeof( uint32_t ) );
@@ -168,6 +177,7 @@ const TickType_t xTimerPeriod = mainTIMER_SEND_FREQUENCY_MS;
 
 		if( xTimer != NULL )
 		{
+			initializeMyPort(obj,0);
 			xTimerStart( xTimer, 0 );
 		}
 
@@ -183,6 +193,7 @@ const TickType_t xTimerPeriod = mainTIMER_SEND_FREQUENCY_MS;
 
 	// NOTE: Original was changed such that will code will stop after
 	// 		we reach maxNUM_CYCLES as indicated by static counter.
+	deleteMyPort(obj);
 	return;
 }
 /*-----------------------------------------------------------*/
@@ -263,6 +274,9 @@ uint32_t ulReceivedValue;
 		else if( ulReceivedValue == mainVALUE_SENT_FROM_TIMER )
 		{
 			console_print( "Message received from software timer\n" );
+			double cur = xTaskGetTickCount();
+			setMyPortTime(obj, cur);
+			printf("time (ms) %.6g\t\n",getMyPortTime(obj));
 			counter++;
 			if (counter > maxNUM_CYCLES)
 				vTaskEndScheduler();
