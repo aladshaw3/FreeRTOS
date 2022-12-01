@@ -5,6 +5,17 @@
 # ALSO NOTE: You need to run '.posix_demo.out' with 'sudo' permissions
 # to test the TCP comms demo.
 
+# Define standard console colors
+BLACK        := $(shell tput -Txterm setaf 0)
+RED          := $(shell tput -Txterm setaf 1)
+GREEN        := $(shell tput -Txterm setaf 2)
+YELLOW       := $(shell tput -Txterm setaf 3)
+LIGHTPURPLE  := $(shell tput -Txterm setaf 4)
+PURPLE       := $(shell tput -Txterm setaf 5)
+BLUE         := $(shell tput -Txterm setaf 6)
+WHITE        := $(shell tput -Txterm setaf 7)
+NC := $(shell tput -Txterm sgr0)
+
 CC := gcc
 CXX := g++
 BIN := posix_demo.out
@@ -98,20 +109,25 @@ DEP_FILE = $(OBJ_FILES:%.o=%.d)
 # NOTE: when building with C++ files, the 'main' executable
 #	must be compiled with g++.
 ${BIN} : ${OBJ_FILES}
+	@echo "$(YELLOW)Linking objects...$(NC)"
 	$(CXX) $^ $(CXXFLAGS) ${LDFLAGS} -o $@
+	@echo "$(GREEN)Finished!$(NC)"
 
 -include ${DEP_FILE}
 DEPFLAGS = -MMD -MF $(@:.o=.d)
 
 %.o : %.c
+	@echo "$(LIGHTPURPLE)Compiling C...$(NC)"
 	$(CC) $(CFLAGS) ${INCLUDE_DIRS} $(DEPFLAGS) -c $< -o $@
 
 %.o : %.cpp
+	@echo "$(BLUE)Compiling C++...$(NC)"
 	$(CXX) $(CXXFLAGS) ${INCLUDE_DIRS} $(DEPFLAGS) -c $< -o $@
 
 .PHONY: clean help
 
 clean:
+	@echo "$(RED)Cleaning objects...$(NC)"
 	-rm -rf $(OBJ_FILES) $(DEP_FILE) $(BIN)
 
 help:
