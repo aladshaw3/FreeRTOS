@@ -1,4 +1,4 @@
-name: Original FreeRTOS Demo
+name: SIL Blinky Demo
 
 on:
   push:
@@ -25,18 +25,36 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@main
 
-      - name: Install dependencies into environment
+      - name: Install FreeRTOS dependencies into environment
         shell: bash -l {0}
         run: |
           sudo apt-get install -y build-essential gcc gdb make libpcap-dev
+
+      - name: Activate spansil environment (${{ matrix.python-version }})
+        uses: conda-incubator/setup-miniconda@main
+        with:
+          python-version: ${{ matrix.python-version }}
+          channels: conda-forge,defaults
+          channel-priority: true
+          activate-environment: spansil
+
+      - name: Install SpanSIL dependencies into environment
+        shell: bash -l {0}
+        run: |
+          conda init
+          conda activate spansil
+          conda install -c conda-forge doxygen pytest
+          conda list
 
       - name: Grab GitSubmodules
         shell: bash -l {0}
         run: |
           git submodule update --init --recursive
 
-      - name: Build Demo
+      - name: Run Blink Test
         shell: bash -l {0}
         run: |
-          cd FreeRTOS/Demo/Posix_GCC
-          make
+          conda activate spansil
+          cd FreeRTOS/SIL/Posix_GCC
+          pytest
+          make clean

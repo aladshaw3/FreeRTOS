@@ -109,6 +109,9 @@ queue send software timer respectively. */
 #define mainVALUE_SENT_FROM_TASK			( 100UL )
 #define mainVALUE_SENT_FROM_TIMER			( 200UL )
 
+/* The maximum number of cycles in the scheduler */
+#define maxNUM_CYCLES 						( 3 )
+
 /*-----------------------------------------------------------*/
 
 /*
@@ -129,6 +132,9 @@ static QueueHandle_t xQueue = NULL;
 
 /* A software timer that is started from the tick hook. */
 static TimerHandle_t xTimer = NULL;
+
+/* Global defined counter */
+static int counter = 0;
 
 /*-----------------------------------------------------------*/
 
@@ -166,7 +172,7 @@ const TickType_t xTimerPeriod = mainTIMER_SEND_FREQUENCY_MS;
 		}
 
 		/* Start the tasks and timer running. */
-		vTaskStartScheduler();
+		vTaskStartScheduler(); // This will never stop
 	}
 
 	/* If all is well, the scheduler will now be running, and the following
@@ -174,7 +180,10 @@ const TickType_t xTimerPeriod = mainTIMER_SEND_FREQUENCY_MS;
 	there was insufficient FreeRTOS heap memory available for the idle and/or
 	timer tasks	to be created.  See the memory management section on the
 	FreeRTOS web site for more details. */
-	for( ;; );
+
+	// NOTE: Original was changed such that will code will stop after
+	// 		we reach maxNUM_CYCLES as indicated by static counter.
+	return;
 }
 /*-----------------------------------------------------------*/
 
@@ -254,6 +263,9 @@ uint32_t ulReceivedValue;
 		else if( ulReceivedValue == mainVALUE_SENT_FROM_TIMER )
 		{
 			console_print( "Message received from software timer\n" );
+			counter++;
+			if (counter > maxNUM_CYCLES)
+				vTaskEndScheduler();
 		}
 		else
 		{

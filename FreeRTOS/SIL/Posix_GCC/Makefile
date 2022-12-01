@@ -2,6 +2,9 @@
 # dependencies such that other neigboring examples would not have to
 # build again any common dependencies.
 
+# ALSO NOTE: You need to run '.posix_demo.out' with 'sudo' permissions
+# to test the TCP comms demo.
+
 CC := gcc
 BIN := posix_demo.out
 
@@ -76,8 +79,8 @@ SOURCE_FILES += ${FREERTOS_PLUS_DIR}/Source/FreeRTOS-Plus-Trace/trcStreamingReco
 SOURCE_FILES += ${FREERTOS_PLUS_DIR}/Source/FreeRTOS-Plus-Trace/streamports/File/trcStreamingPort.c
 
 
-CFLAGS := -ggdb3 -O3 -DprojCOVERAGE_TEST=0 -D_WINDOWS_
-LDFLAGS := -ggdb3 -O3 -pthread -lpcap
+CFLAGS := -O3 -DprojCOVERAGE_TEST=0
+LDFLAGS := -O3 -pthread -lpcap
 
 OBJ_FILES = $(SOURCE_FILES:%.c=%.o)
 
