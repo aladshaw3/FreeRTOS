@@ -83,7 +83,7 @@ C_SOURCE_FILES += ${FREERTOS_PLUS_DIR}/Source/FreeRTOS-Plus-Trace/streamports/Fi
 CXX_SOURCE_FILES := $(wildcard *.cpp)
 
 CFLAGS := -O3 -DprojCOVERAGE_TEST=0
-CXXFLAGS := -O3 -std=c++14 -DprojCOVERAGE_TEST=0
+CXXFLAGS := -O3 -Wall -Werror -std=c++14 -DprojCOVERAGE_TEST=0
 LDFLAGS := -O3 -pthread -lpcap
 
 C_OBJ_FILES = $(C_SOURCE_FILES:%.c=%.o)
@@ -92,7 +92,6 @@ CXX_OBJ_FILES = $(CXX_SOURCE_FILES:%.cpp=%.o)
 
 OBJ_FILES = $(C_OBJ_FILES) $(CXX_OBJ_FILES)
 
-#DEP_FILE = $(C_OBJ_FILES:%.o=%.d)
 DEP_FILE = $(OBJ_FILES:%.o=%.d)
 
 
@@ -103,19 +102,6 @@ ${BIN} : ${OBJ_FILES}
 
 -include ${DEP_FILE}
 DEPFLAGS = -MMD -MF $(@:.o=.d)
-
-#main_blinky.o : main_blinky.c
-#	$(CXX) $(CXXFLAGS) ${INCLUDE_DIRS} $(DEPFLAGS) -c $< -o $@
-
-
-#$(ODIR)/%.o: src/%.c $(DEPS)
-#	$(CC) -O3 -c -o $@ $< $(CFLAGS)
-#
-#$(ODIR)/%.o: src/%.cpp $(DEPS)
-#	$(CXX) -O3 -c -o $@ $< $(CXXFLAGS)
-#
-#$(EXE): $(OBJ)
-#	$(CXX) -O3 -o $@ $^ $(CXXFLAGS)
 
 %.o : %.c
 	$(CC) $(CFLAGS) ${INCLUDE_DIRS} $(DEPFLAGS) -c $< -o $@
