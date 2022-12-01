@@ -1,3 +1,5 @@
+[![OG Demo](https://github.com/aladshaw3/FreeRTOS/actions/workflows/original_SIL_demo.yml/badge.svg)](https://github.com/aladshaw3/FreeRTOS/actions/workflows/original_SIL_demo.yml)
+
 ### NOTICE ###
 This is a clone of `FreeRTOS` pinned to Tag `V10.4.1` that has now diverged from the original source project.
 The purpose of this divergence is that this specific version of `FreeRTOS` actually has a working `FreeRTOS/Demo/Posix_GCC` build on Linux. Current versions of this demo, from the original source, are broken.
