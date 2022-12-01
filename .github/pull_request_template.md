@@ -1,16 +1,11 @@
-<!--- Title -->
+## Fixes/Resolves:
 
-Description
------------
-<!--- Describe your changes in detail. -->
+(replace this with the issue # fixed or resolved, if no issue exists then a brief statement of what this PR does)
 
-Test Steps
------------
-<!-- Describe the steps to reproduce. -->
+## Summary/Motivation:
 
-Related Issue
------------
-<!-- If any, please provide issue ID. -->
+(replace this with the long description of the PR)
 
-
-By submitting this pull request, I confirm that you can use, modify, copy, and redistribute this contribution, under the terms of your choice.
+## Changes proposed in this PR:
+- (replace these with)
+- (list of changes)
