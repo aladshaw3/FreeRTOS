@@ -1,0 +1,42 @@
+name: Original FreeRTOS Demo
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: '30 5 * * 5'
+
+jobs:
+  unit-tests:
+    name: Run Build Tests (py${{ matrix.python-version }}/${{ matrix.os }})
+    runs-on: ${{ matrix.os-version }}
+    strategy:
+      matrix:
+        python-version:
+          - '3.11'
+        os:
+          - linux
+        include:
+          - os: linux
+            os-version: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@main
+
+      - name: Install dependencies into environment
+        shell: bash -l {0}
+        run: |
+          sudo apt-get install -y build-essential gcc gdb make libpcap-dev
+
+      - name: Grab GitSubmodules
+        shell: bash -l {0}
+        run: |
+          git submodule update --init --recursive
+
+      - name: Build Demo
+        shell: bash -l {0}
+        run: |
+          cd FreeRTOS/Demo/Posix_GCC
+          make

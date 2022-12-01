@@ -1,3 +1,13 @@
+[![OG Demo](https://github.com/aladshaw3/FreeRTOS/actions/workflows/original_SIL_demo.yml/badge.svg)](https://github.com/aladshaw3/FreeRTOS/actions/workflows/original_SIL_demo.yml)
+[![SIL Blinky Demo](https://github.com/aladshaw3/FreeRTOS/actions/workflows/blinky_demo.yml/badge.svg)](https://github.com/aladshaw3/FreeRTOS/actions/workflows/blinky_demo.yml)
+
+### NOTICE ###
+This is a clone of `FreeRTOS` pinned to Tag `V10.4.1` that has now diverged from the original source project.
+The purpose of this divergence is that this specific version of `FreeRTOS` actually has a working `FreeRTOS/Demo/Posix_GCC` build on Linux. Current versions of this demo, from the original source, are broken.
+
+The remainder of this `README` has updated the instructions specifically for this diverged fork of the project.
+
+
 ## Getting started
 The easiest way to use FreeRTOS is to start with one of the pre-configured demo application projects (found in the FreeRTOS/Demo directory).  That way you will have the correct FreeRTOS source files included, and the correct include paths configured.  Once a demo application is building and executing you can remove the demo application files, and start to add in your own application source files.  See the [FreeRTOS Kernel Quick Start Guide](https://www.freertos.org/FreeRTOS-quick-start-guide.html) for detailed instructions and other useful links.
 
@@ -9,15 +19,9 @@ If you have any questions or need assistance troubleshooting your FreeRTOS proje
 ## Cloning this repository
 This repo uses [Git Submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules) to bring in dependent components.
 
-Note: If you download the ZIP file provided by GitHub UI, you will not get the contents of the submodules. (The ZIP file is also not a valid git repository)
-
-To clone using HTTPS:
-```
-git clone https://github.com/FreeRTOS/FreeRTOS.git --recurse-submodules
-```
 Using SSH:
 ```
-git clone git@github.com:FreeRTOS/FreeRTOS.git --recurse-submodules
+git clone git@github.com:aladshaw3/FreeRTOS.git --recurse-submodules
 ```
 
 If you have downloaded the repo without using the `--recurse-submodules` argument, you need to run:
@@ -41,5 +45,5 @@ The [FreeRTOS-Plus/Source](https://github.com/FreeRTOS/FreeRTOS/tree/master/Free
 [FreeRTOS-Labs](https://github.com/FreeRTOS/FreeRTOS/tree/master/FreeRTOS-Labs) contains libraries and demos that are fully functional, but undergoing optimizations or refactorization to improve memory usage, modularity,
 documentation, demo usability, or test coverage.  At this time the projects ARE A WORK IN PROGRESS and will be released in the main FreeRTOS directories of the download following full review and completion of the documentation.
 
-## Previous releases
-Previous releases are available for download under [releases](https://github.com/FreeRTOS/FreeRTOS/releases).
+## Other releases of the Original Source Project
+Other releases are available for download under [releases](https://github.com/FreeRTOS/FreeRTOS/releases).

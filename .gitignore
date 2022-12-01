@@ -1,4 +1,14 @@
-# Ignore MacOS file system related.  
+# Ignore all objects, deps, and dumps
+*.o
+*.d
+*.dump
+
+# Ignore all executables
+*.exe
+*.app
+*.out
+
+# Ignore MacOS file system related.
 **/*.DS_Store*
 
 # Ignore build results
