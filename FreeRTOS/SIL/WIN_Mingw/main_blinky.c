@@ -108,6 +108,12 @@ queue send software timer respectively. */
 #define mainVALUE_SENT_FROM_TASK			( 100UL )
 #define mainVALUE_SENT_FROM_TIMER			( 200UL )
 
+/* The maximum number of cycles in the scheduler */
+#define maxNUM_CYCLES 						( 3 )
+
+/* Global defined counter */
+static int counter = 0;
+
 /*-----------------------------------------------------------*/
 
 /*
@@ -244,7 +250,7 @@ uint32_t ulReceivedValue;
 		is it an expected value?  Normally calling printf() from a task is not
 		a good idea.  Here there is lots of stack space and only one task is
 		using console IO so it is ok.  However, note the comments at the top of
-		this file about the risks of making Windows system calls (such as 
+		this file about the risks of making Windows system calls (such as
 		console output) from a FreeRTOS task. */
 		if( ulReceivedValue == mainVALUE_SENT_FROM_TASK )
 		{
@@ -253,6 +259,12 @@ uint32_t ulReceivedValue;
 		else if( ulReceivedValue == mainVALUE_SENT_FROM_TIMER )
 		{
 			printf( "Message received from software timer\r\n" );
+			counter++;
+			if (counter > maxNUM_CYCLES)
+			{
+				printf( "\n End of Demo\n\n");
+				vTaskEndScheduler();
+			}
 		}
 		else
 		{
@@ -263,4 +275,3 @@ uint32_t ulReceivedValue;
 	}
 }
 /*-----------------------------------------------------------*/
-
