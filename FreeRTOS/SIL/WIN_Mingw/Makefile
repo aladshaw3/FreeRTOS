@@ -10,10 +10,8 @@ WHITE        := $(shell tput -Txterm setaf 7)
 NC := $(shell tput -Txterm sgr0)
 
 CC := gcc
-CFLAGS := -D_WIN32_WINNT=0x0601 -DprojCOVERAGE_TEST=0 -O3 -g3 -Wall -Wextra -fmessage-length=0 -Wcast-qual
-LDFLAGS := -Xlinker -Map=rtosdemo.map -lwinmm
-
-# CURRENT ISSUE: need to link to library winmm to build 
+CFLAGS := -D_WIN32_WINNT=0x0601 -DprojCOVERAGE_TEST=0 -O3 -Wall -fmessage-length=0 -Wcast-qual
+LDFLAGS := -Xlinker -Map=rtosdemo.map -lwinmm -LWinPort
 
 BIN := bin
 TARGET := win_demo.exe
@@ -24,11 +22,11 @@ REL_PATH_TO_RTOS_Plus := ../../../FreeRTOS-Plus
 INCLUDE_DIRS := -I.
 INCLUDE_DIRS += -ITrace_Recorder_Configuration
 INCLUDE_DIRS += -IDemosModifiedForLowTickRate
+INCLUDE_DIRS += -IWinPort
 INCLUDE_DIRS += -I${REL_PATH_TO_RTOS}/Source
 INCLUDE_DIRS += -I${REL_PATH_TO_RTOS}/Source/include
 INCLUDE_DIRS += -I${REL_PATH_TO_RTOS}/Demo/Common/include
 INCLUDE_DIRS += -I${REL_PATH_TO_RTOS}/Demo/Common/Minimal
-INCLUDE_DIRS += -I${REL_PATH_TO_RTOS}/Source/portable/MSVC-MingW
 INCLUDE_DIRS += -I${REL_PATH_TO_RTOS_Plus}/Source/FreeRTOS-Plus-Trace/Include
 
 # Generalized all files in relevant directories to grab (internal)
@@ -45,7 +43,7 @@ C_FILES += $(wildcard ${REL_PATH_TO_RTOS_Plus}/Source/FreeRTOS-Plus-Trace/*.c)
 C_FILES += ${REL_PATH_TO_RTOS}/Source/portable/MemMang/heap_5.c
 
 # Windows version of the port objects (equivalent to Posix in Linux)
-C_FILES += ${REL_PATH_TO_RTOS}/Source/portable/MSVC-MingW/port.c
+C_FILES += $(wildcard WinPort/*.c)
 
 # Specific set of files to include from Demo/Common/Minimal
 C_FILES += ${REL_PATH_TO_RTOS}/Demo/Common/Minimal/AbortDelay.c
@@ -117,7 +115,7 @@ $(BIN)/%.o : ${REL_PATH_TO_RTOS}/Source/portable/MemMang/%.c
 	@echo "$(LIGHTPURPLE)Compiling C...$(NC)"
 	$(CC) $(CFLAGS) ${INCLUDE_DIRS} $(DEPFLAGS) -c $< -o $@
 
-$(BIN)/%.o : ${REL_PATH_TO_RTOS}/Source/portable/MSVC-MingW/%.c
+$(BIN)/%.o : WinPort/%.c
 	@echo "$(LIGHTPURPLE)Compiling C...$(NC)"
 	$(CC) $(CFLAGS) ${INCLUDE_DIRS} $(DEPFLAGS) -c $< -o $@
 
@@ -132,3 +130,4 @@ clean:
 
 help:
 	@echo "deps: $(deps)"
+	@echo $(PATH)
