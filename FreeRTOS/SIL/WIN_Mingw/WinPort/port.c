@@ -38,11 +38,6 @@
 	#pragma comment(lib, "winmm.lib")
 #endif
 
-//#include "mmsystem.h"
-//#include "portmacro.h"
-//#include <Windows.h>
-//#include "timeapi.h"
-
 #define portMAX_INTERRUPTS				( ( uint32_t ) sizeof( uint32_t ) * 8UL ) /* The number of bits in an uint32_t. */
 #define portNO_CRITICAL_NESTING 		( ( uint32_t ) 0 )
 
