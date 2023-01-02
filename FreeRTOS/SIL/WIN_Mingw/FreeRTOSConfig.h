@@ -50,9 +50,9 @@
 #define configUSE_TRACE_FACILITY				1
 #define configUSE_16_BIT_TICKS					0
 #define configIDLE_SHOULD_YIELD					1
-#define configUSE_MUTEXES						1
+#define configUSE_MUTEXES						1						// May cause issues with Simulink
 #define configCHECK_FOR_STACK_OVERFLOW			0
-#define configUSE_RECURSIVE_MUTEXES				1
+#define configUSE_RECURSIVE_MUTEXES				1			// May cause issues with Simulink
 #define configQUEUE_REGISTRY_SIZE				20
 #define configUSE_APPLICATION_TASK_TAG			1
 #define configUSE_COUNTING_SEMAPHORES			1

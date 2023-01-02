@@ -2,11 +2,15 @@
 *.o
 *.d
 *.dump
+*.map
 
 # Ignore all executables
 *.exe
 *.app
 *.out
+
+# Ignore Simulink Garbage
+*slprj/
 
 # Ignore MacOS file system related.
 **/*.DS_Store*
