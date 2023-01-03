@@ -23,3 +23,5 @@ jobs:
         uses: matlab-actions/setup-matlab@v1
       - name: Run tests and generate artifacts
         uses: matlab-actions/run-tests@v1
+        with:
+          source-folder: FreeRTOS/SIL/WIN_Mingw
