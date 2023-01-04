@@ -82,6 +82,12 @@ queue send software timer respectively. */
 #define mainVALUE_SENT_FROM_TASK			( 100UL )
 #define mainVALUE_SENT_FROM_TIMER			( 200UL )
 
+/* The maximum number of cycles in the scheduler */
+#define maxNUM_CYCLES 						( 3 )
+
+/* Global defined counter */
+static int counter = 0;
+
 /*-----------------------------------------------------------*/
 
 /*
@@ -223,6 +229,12 @@ uint32_t ulReceivedValue;
 		else if( ulReceivedValue == mainVALUE_SENT_FROM_TIMER )
 		{
 			printf( "Message received from software timer\r\n" );
+      counter++;
+			if (counter > maxNUM_CYCLES)
+			{
+				printf( "\n End of Demo\n\n");
+				vTaskEndScheduler();
+			}
 		}
 		else
 		{
