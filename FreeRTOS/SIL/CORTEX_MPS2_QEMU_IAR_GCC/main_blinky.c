@@ -58,6 +58,7 @@
 
 /* Standard includes. */
 #include <stdio.h>
+#include <stdlib.h>
 
 /* Kernel includes. */
 #include "FreeRTOS.h"
@@ -232,8 +233,12 @@ uint32_t ulReceivedValue;
       counter++;
 			if (counter > maxNUM_CYCLES)
 			{
+        // NOTE: You cannot gracefully stop this way when doing hardware emulation
+        /*
 				printf( "\n End of Demo\n\n");
 				vTaskEndScheduler();
+        exit(EXIT_SUCCESS);
+        */
 			}
 		}
 		else
