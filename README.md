@@ -1,6 +1,7 @@
 [![OG Demo](https://github.com/aladshaw3/FreeRTOS/actions/workflows/original_SIL_demo.yml/badge.svg)](https://github.com/aladshaw3/FreeRTOS/actions/workflows/original_SIL_demo.yml)
 [![SIL Blinky Demo](https://github.com/aladshaw3/FreeRTOS/actions/workflows/blinky_demo.yml/badge.svg)](https://github.com/aladshaw3/FreeRTOS/actions/workflows/blinky_demo.yml)
 [![SIL WIN Demo](https://github.com/aladshaw3/FreeRTOS/actions/workflows/win_blinky_demo.yml/badge.svg)](https://github.com/aladshaw3/FreeRTOS/actions/workflows/win_blinky_demo.yml)
+[![QEMU Demo](https://github.com/aladshaw3/FreeRTOS/actions/workflows/CORTEX_M3_Emulation.yml/badge.svg)](https://github.com/aladshaw3/FreeRTOS/actions/workflows/CORTEX_M3_Emulation.yml)
 
 ### NOTICE ###
 This is a clone of `FreeRTOS` pinned to Tag `V10.4.1` that has now diverged from the original source project.
